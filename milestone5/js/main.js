@@ -167,7 +167,7 @@ createApp({
                             status: 'received'
                         }
                     ]
-                }
+                },
             ],
             activeContact: 0,
             newMessage: '',
@@ -199,11 +199,18 @@ createApp({
               }, 1000);
         }, 
         filteredContacts(){
-            if(this.keyContact !== ''){
-                return this.contacts.filter((contact) => contact.name.toLowerCase().includes(this.keyContact.toLowerCase()));
-            }else{
-                return this.contacts;
-            }
+            this.contacts.forEach((contact) =>{
+                if(contact.name.toLowerCase().includes(this.keyContact)){
+                    contact.visible = true;
+                }else{
+                    contact.visible = false;
+                }
+
+            });
         },
+        deleteMessage(message){
+            const messageIndex = this.contacts[this.activeContact].messages.indexOf(message);
+            this.contacts[this.activeContact].messages.splice(messageIndex, 1)
+        }
     }
 }).mount('#app');

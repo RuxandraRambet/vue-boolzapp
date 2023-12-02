@@ -54,14 +54,14 @@
                 <!-- Search -->
                 <div class="search">
                     <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                    <input type="text" placeholder="Cerca o inizia un nuova chat" v-model="keyContact">
+                    <input type="text" placeholder="Cerca o inizia un nuova chat" v-model="keyContact" @keyup="filteredContacts" >
                 </div>
                 <!-- /Search -->
 
                 <!-- Chats -->
                 <div class="chats">
                     <ul>
-                        <li v-for="(contact, index) in filteredContacts()" @click="selectedContact(index)">
+                        <li v-for="(contact, index) in contacts" @click="selectedContact(index)" v-show="contact.visible" >
                             <img :src="contact.avatar" :alt="contact.name" class="avatar-photo">
                             <div class="contact-info">
                                 <h4 class="info">{{ contact.name }}</h4>
@@ -100,7 +100,14 @@
                     <ul class="messages">
                         <li v-for="message in contacts[activeContact].messages"
                             :class="{'my-message': message.status === 'sent', 'contact-message': message.status === 'received'}">
-                            <p class="message-text">{{ message.message }}</p>
+                            <div class="dropdown" v-if="message.dropdown === true">
+                                <p>Message info</p>
+                                <p @click="deleteMessage(message)">Delete message</p>
+                            </div>
+                            <div class="message-text">
+                                {{ message.message }}
+                                <i class="fas fa-angle-down" type="button" @click="message.dropdown =!message.dropdown"></i>
+                            </div>
                             <p class="message-time">
                                {{ message.date }}
                             </p>
