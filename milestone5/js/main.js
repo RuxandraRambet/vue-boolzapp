@@ -5,7 +5,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-           
+       
             contacts: [
                 {
                     name: 'Michele',
@@ -170,8 +170,8 @@ createApp({
                 },
             ],
             activeContact: 0,
-            newMessage: '',
-            keyContact: '',
+            newMessage: '', 
+            keyContact: '', 
         };
     },
     methods: {
@@ -200,7 +200,7 @@ createApp({
         }, 
         filteredContacts(){
             this.contacts.forEach((contact) =>{
-                if(contact.name.toLowerCase().includes(this.keyContact)){
+                if(contact.name.toLowerCase().includes(this.keyContact.toLowerCase())){
                     contact.visible = true;
                 }else{
                     contact.visible = false;
