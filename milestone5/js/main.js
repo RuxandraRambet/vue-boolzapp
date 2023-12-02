@@ -5,7 +5,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-       
+        
             contacts: [
                 {
                     name: 'Michele',
@@ -170,8 +170,8 @@ createApp({
                 },
             ],
             activeContact: 0,
-            newMessage: '', 
-            keyContact: '', 
+            newMessage: '',
+            keyContact: '',
         };
     },
     methods: {
@@ -179,7 +179,7 @@ createApp({
             this.activeContact = index;
         },
         sendMessage(){
-            if(this.newMessage !== ''){
+            if(this.newMessage.trim() !== ''){
                 const newMessage = {
                     date: new Date().toLocaleString(),
                     message: this.newMessage,
@@ -213,4 +213,4 @@ createApp({
             this.contacts[this.activeContact].messages.splice(messageIndex, 1)
         }
     }
-}).mount('#app');
+}).mount('#app'); 
